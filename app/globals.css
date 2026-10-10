@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; background: #030406; }
+body { @apply bg-ink text-slate-200 antialiased; font-family: var(--font-body), system-ui, sans-serif; }
+:focus-visible { outline: 2px solid #22d3ee; outline-offset: 3px; border-radius: 4px; }
+::selection { background: #1e90ff55; }
+
+@layer components {
+  .btn-primary { @apply inline-flex items-center justify-center gap-2 rounded-lg bg-electric px-5 py-3 text-sm font-semibold text-white transition hover:bg-cyan hover:text-ink hover:shadow-[0_0_24px_#22d3ee55]; }
+  .btn-gold { @apply inline-flex items-center justify-center gap-2 rounded-lg bg-gold px-5 py-3 text-sm font-semibold text-ink transition hover:brightness-110 hover:shadow-[0_0_24px_#f5b82e55]; }
+  .btn-ghost { @apply inline-flex items-center justify-center gap-2 rounded-lg border border-line px-5 py-3 text-sm font-semibold text-slate-100 transition hover:border-electric hover:text-cyan; }
+  .card { @apply rounded-xl border border-line bg-panel transition duration-300 hover:-translate-y-0.5 hover:border-electric/60 hover:shadow-[0_0_30px_#1e90ff22]; }
+}
+
+.hero-glow {
+  background:
+    radial-gradient(60% 80% at 80% 0%, rgba(30,144,255,0.18), transparent 60%),
+    radial-gradient(40% 50% at 10% 100%, rgba(245,184,46,0.07), transparent 70%);
+}
+.logo-fade { -webkit-mask-image: radial-gradient(closest-side, #000 72%, transparent 100%); mask-image: radial-gradient(closest-side, #000 72%, transparent 100%); }
+
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.float { animation: float 7s ease-in-out infinite; }
+@keyframes sweep { from { background-position: 0% 50%; } to { background-position: 200% 50%; } }
+.accent-line { height: 2px; background: linear-gradient(90deg, #1e90ff, #22d3ee, #f5b82e, #1e90ff); background-size: 200% 100%; animation: sweep 6s linear infinite; }
+
+details > summary { list-style: none; cursor: pointer; }
+details > summary::-webkit-details-marker { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .float, .accent-line { animation: none; }
+  * { transition-duration: .01ms !important; }
+}
